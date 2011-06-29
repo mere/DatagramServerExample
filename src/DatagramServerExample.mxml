@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" 
+					   xmlns:context="org.spicefactory.parsley.dsl.context.*"
+					   xmlns:parsley="http://www.spicefactory.org/parsley" 
+					   xmlns:cairngorm="http://ns.adobe.com/cairngorm" xmlns:presentation="com.mere.examples.presentation.*">
+	<fx:Script>
+		<![CDATA[
+			import com.mere.utils.datagramserver.DatagramServerContext;
+			
+			import mx.logging.LogEventLevel;
+			
+			import org.spicefactory.parsley.core.messaging.ErrorPolicy;
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<parsley:ContextBuilder id='context'  >
+			<cairngorm:CairngormIntegrationSupport/>
+			<parsley:FlexConfig type="{ DatagramServerExampleConfig }"/>
+			<parsley:FlexConfig type="{ DatagramServerContext }"/>
+			
+			<parsley:MessageSettings unhandledErrors="{ErrorPolicy.RETHROW}"/>
+		</parsley:ContextBuilder>
+			
+		<s:TraceTarget level="{ LogEventLevel.ALL }" >
+			<s:filters>
+				<fx:Array>
+					<fx:String>com.mere.*</fx:String>
+				</fx:Array>
+			</s:filters>
+		</s:TraceTarget>
+		
+		<!-- display framework warnings -->
+		<s:TraceTarget level="{ LogEventLevel.WARN }">
+			<s:filters>
+				<fx:Array>
+					<fx:String>com.adobe.cairngorm.*</fx:String>
+					<fx:String>org.spicefactory.*</fx:String>
+				</fx:Array>
+			</s:filters>
+		</s:TraceTarget>
+		
+		
+	</fx:Declarations>
+	
+	<presentation:DatagramPanel />
+	
+	
+</s:WindowedApplication>

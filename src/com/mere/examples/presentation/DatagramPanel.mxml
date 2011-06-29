@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  xmlns:parsley="http://www.spicefactory.org/parsley"
+		  width="100%" height="100%">
+	
+	<fx:Declarations>
+		<parsley:FastInject injectionComplete="injectionComplete()">
+			<parsley:Inject property="data" type="com.mere.utils.datagramserver.domain.DatagramModel" />
+			<parsley:Inject property="model" type="com.mere.examples.presentation.DatagramPanelPM" />
+			<parsley:Inject property="logs" type="com.mere.examples.domain.DatagramLogs" />
+		</parsley:FastInject>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.mere.examples.domain.DatagramLogs;
+			import com.mere.utils.datagramserver.domain.DatagramModel;
+			import com.mere.utils.datagramserver.domain.enum.DatagramStatusEnum;
+			
+			import org.spicefactory.lib.logging.LogContext;
+			import org.spicefactory.lib.logging.Logger;
+			
+			private static const log : Logger = LogContext.getLogger(DatagramPanel);
+			
+			[Bindable] //fastinjected
+			public var data:DatagramModel;
+			
+			[Bindable] //fastinjected
+			public var model:DatagramPanelPM;
+			
+			[Bindable] //fastinjected
+			public var logs:DatagramLogs;
+			
+			protected function injectionComplete():void
+			{
+			}
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" paddingTop="20" paddingBottom="20" />
+	</s:layout>
+	<s:Label text="Datagram Server config:" />
+	<s:Label text="datagram ip" />
+	<s:HGroup>
+		<s:DropDownList id='datagramips' width="160" 
+						dataProvider="{data.hostsAvailable}"
+						selectedIndex="{data.hostsAvailable.getItemIndex(data.host)}"
+						change="data.host = data.hostsAvailable.getItemAt(event.newIndex).toString()"
+						/>
+		<s:TextInput text="@{data.port}" width="40" />
+	</s:HGroup>
+	
+	<s:Label text="status: {data.status}" />
+	
+	<!--
+		Connection buttons
+	-->
+	<s:Button label="Connect" click="model.connect()" 		
+			  includeInLayout="{data.status==DatagramStatusEnum.DISCONNECTED}" visible="{data.status==DatagramStatusEnum.DISCONNECTED}" />
+	<s:Button label="Disconnect" click="model.disconnect()" 
+			  includeInLayout="{data.status==DatagramStatusEnum.CONNECTED}" visible="{data.status==DatagramStatusEnum.CONNECTED}"/>
+	<s:Button label="Cancel" click="model.disconnect()" 	
+			  includeInLayout="{data.status==DatagramStatusEnum.CONNECTING}" visible="{data.status==DatagramStatusEnum.CONNECTING}"/>
+	<s:Button label="Retry" click="model.connect()" 		
+			  includeInLayout="{data.status==DatagramStatusEnum.FAILED}" visible="{data.status==DatagramStatusEnum.FAILED}"/>
+	
+	<!--
+		Logs
+	-->
+	<s:Panel title="output" width="80%" height="100%">
+		<s:List dataProvider="{logs.logs}"
+				width="100%" height="100%">
+			
+		</s:List>
+	</s:Panel>
+		
+</s:Group>

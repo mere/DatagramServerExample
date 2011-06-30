@@ -5,6 +5,11 @@ package com.mere.examples.application
 	import com.mere.utils.datagramserver.events.DatagramStatusEvent;
 	
 	import flash.events.Event;
+	
+	import mx.core.BitmapAsset;
+	
+	import spark.components.gridClasses.GridColumn;
+	import spark.primitives.BitmapImage;
 
 	public class DatagramCommand
 	{
@@ -27,6 +32,7 @@ package com.mere.examples.application
 		public function clearData(e:Event):void
 		{
 			logs.logs.removeAll();
+			GridColumn
 		}
 		
 		[MessageHandler]

@@ -1,5 +1,6 @@
 package com.mere.examples.presentation
 {
+	import com.mere.utils.datagramserver.events.DatagramServerEvent;
 	import com.mere.utils.datagramserver.infrastructure.DatagramServer;
 	
 	import flash.events.Event;
@@ -11,12 +12,12 @@ package com.mere.examples.presentation
 		
 		public function connect():void
 		{
-			dispatcher(new Event('START_DATAGRAM_SERVER'));
+			dispatcher(new Event(DatagramServerEvent.START));
 		}
 		
 		public function disconnect():void
 		{
-			dispatcher(new Event('STOP_DATAGRAM_SERVER'));
+			dispatcher(new Event(DatagramServerEvent.STOP));
 		}
 	}
 }

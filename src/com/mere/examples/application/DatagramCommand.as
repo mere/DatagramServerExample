@@ -14,8 +14,13 @@ package com.mere.examples.application
 		[MessageHandler]
 		public function dataReceived(e:DataReceivedEvent):void
 		{
-			trace('data received:'+e.string);
 			logs.add(e.string);
+			/**
+			 * you can also use:
+			 * e.ip 	: returns the IP of the sender
+			 * e.data 	: returns the packet as a bytearray
+			 * e.xml 	: returns the packet as xml
+			 */ 
 		}
 		
 		[MessageHandler(selector="CLEARLOGS")]

@@ -16,3 +16,6 @@ DatagramServerExample is a standalone Air2.6 project to demonstrate the usage of
 	</li>
 </ul>
 
+<h2>Screenshots</h2>
+<img title="Screen shot 2011-06-30 at 10.31.04" src="http://zoltanb.co.uk/wp-content/uploads/2011/06/Screen-shot-2011-06-30-at-10.31.04.png" alt="Screen shot 2011 06 30 at 10.31.04 Flex Datagram Server" width="274" height="59" />
+<img title="Screen shot 2011-06-30 at 10.31.36" src="http://zoltanb.co.uk/wp-content/uploads/2011/06/Screen-shot-2011-06-30-at-10.31.36.png" alt="Screen shot 2011 06 30 at 10.31.36 Flex Datagram Server" width="580" height="477" />
